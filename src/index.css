@@ -79,3 +79,9 @@
     @apply text-error;
   }
 }
+.ck-editor {
+  border-radius: 10px;
+}
+.ck-content {
+  @apply h-[100px];
+}

@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   LayoutGrid,
   House,
@@ -13,8 +13,10 @@ import {
 import { ReactNode, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
-import { logout, getUser, clearAllUserErrors } from "../store/slices/userSlice";
+import { logout, clearAllUserErrors } from "../store/slices/userSlice";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const menu: {
   icon: ReactNode;
@@ -29,17 +31,17 @@ const menu: {
   {
     icon: <FolderKanban />,
     name: "Project",
-    to: "/",
+    to: "/project",
   },
   {
     icon: <Timer />,
     name: "Timeline",
-    to: "/",
+    to: "/timeline",
   },
   {
     icon: <Cpu />,
     name: "Skills",
-    to: "/",
+    to: "/skills",
   },
 ];
 
@@ -77,12 +79,18 @@ const MainLayout = () => {
           </Link>
           <div className="flex flex-col gap-8">
             {menu.map((item) => (
-              <Link
+              <NavLink
                 to={item.to}
-                className="flex flex-col items-center justify-between"
+                className={({ isActive }) =>
+                  `flex flex-col items-center justify-between ${
+                    isActive
+                      ? "bg-[#f4f4f4] p-2 rounded-lg transition-all"
+                      : "text-gray-500"
+                  }`
+                }
               >
                 {item.icon}
-              </Link>
+              </NavLink>
             ))}
           </div>
           <div className="flex flex-col items-center justify-end flex-1 gap-4">
@@ -117,7 +125,7 @@ const MainLayout = () => {
                   <span className="sr-only">Acme Inc</span>
                 </Link>
                 {menu.map((item) => (
-                  <Link
+                  <NavLink
                     to={item.to}
                     className="flex items-center gap-4 px-2.5 text-gray-500"
                   >
@@ -125,16 +133,17 @@ const MainLayout = () => {
                     <span className="font-semibold text-black text-gray-500">
                       {item.name}
                     </span>
-                  </Link>
+                  </NavLink>
                 ))}
               </nav>
             </SheetContent>
           </Sheet>
         </header>
-        <main className="grid items-start flex-1 gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+        <main className="grid items-start flex-1 gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <Outlet></Outlet>
         </main>
       </div>
+      <ToastContainer />
     </div>
   );
 };

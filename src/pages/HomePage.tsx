@@ -1,35 +1,6 @@
-import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, getUser, clearAllUserErrors } from "../store/slices/userSlice";
-import { useNavigate } from "react-router-dom";
 import { FolderKanban, Cpu, Timer } from "lucide-react";
 
 const HomePage = () => {
-  // const dispatch = useDispatch();
-  // const navigateTo = useNavigate();
-  // const { isAuthenticated, error, message } = useSelector(
-  //   (state) => state.user
-  // );
-
-  // const handelLogout = () => {
-  //   dispatch(logout());
-  //   dispatch(clearAllUserErrors());
-  // };
-
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigateTo("/login");
-  //   }
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  //   if (message !== null) {
-  //     console.log(message);
-  //     dispatch(getUser());
-  //   }
-  // }, [error, isAuthenticated, message, navigateTo]);
-
   return (
     <div>
       <header className="pb-6">Dashboard</header>
